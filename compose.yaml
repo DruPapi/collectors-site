@@ -1,0 +1,33 @@
+services:
+  db:
+    image: mariadb
+    container_name: collectors-db
+    restart: no
+    ports:
+      - "3306:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: secure-password
+      MARIADB_USER: collection
+      MARIADB_PASSWORD: collection
+      MARIADB_DATABASE: collection
+    volumes:
+      - database:/var/lib/mysql
+  php:
+    build:
+      context: php
+      dockerfile: dockerfiles/DevDockerfile
+    container_name: collectors-php
+    volumes:
+      - ./php/src:/var/www
+  server:
+    build:
+      context: server
+      dockerfile: dockerfiles/DevDockerfile
+    container_name: collectors-server
+    ports:
+      - "8080:80"
+    depends_on:
+      - php
+
+volumes:
+  database:
