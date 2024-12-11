@@ -58,7 +58,7 @@
         ],
         "analyse": [
             "./vendor/bin/pint --test",
-            "./vendor/bin/phpstan analyse"
+            "./vendor/bin/phpstan analyse --memory-limit=1G"
         ],
         "fix-cs": [
             "./vendor/bin/pint --dirty"
