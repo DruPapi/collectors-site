@@ -19,7 +19,6 @@ class CollectibleControllerTest extends TestCase
                     'file_name',
                     'value',
                     'in_cart',
-                    'item_type',
                 ],
             ],
             'current_page',
