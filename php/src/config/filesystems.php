@@ -57,6 +57,12 @@ return [
             'throw' => false,
         ],
 
+        'previousDb' => [
+            'driver' => 'local',
+            'root' => database_path('sources'),
+            'serve' => false,
+            'throw' => false,
+        ],
     ],
 
     /*
