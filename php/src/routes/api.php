@@ -1,7 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('test', function () {
-    return json_encode([__FILE__ => __LINE__]);
-});
+Route::get('home', [HomeController::class, 'index']);
