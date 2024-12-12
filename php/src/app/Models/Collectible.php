@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Models\Abstracts\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -36,6 +38,20 @@ class Collectible extends Model
 
     protected $table = 'collectibles';
 
+    protected function inCart(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->cart->quantity ?? 0,
+        );
+    }
+
+    protected function type(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->itemType->name ?? '',
+        );
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -44,5 +60,10 @@ class Collectible extends Model
     public function itemType(): BelongsTo
     {
         return $this->belongsTo(ItemType::class);
+    }
+
+    public function cart(): HasOne
+    {
+        return $this->hasOne(CartItem::class);
     }
 }

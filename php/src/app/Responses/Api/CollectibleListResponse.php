@@ -9,13 +9,12 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use JustSteveKing\StatusCode\Http;
 
-class CollectibleResponse implements Responsable
+class CollectibleListResponse implements Responsable
 {
     public function __construct(
         public readonly Collection $collectibles,
         public readonly int $maxPage,
         public readonly int $currentPage,
-        public readonly Collection $cart,
         public readonly Http $status = Http::OK,
     ) {}
 
@@ -23,7 +22,7 @@ class CollectibleResponse implements Responsable
     {
         return new JsonResponse(
             data: [
-                'items' => $this->filteredCollectibleList(),
+                'items' => $this->toResponseModels(),
                 'max_page' => $this->maxPage,
                 'current_page' => $this->currentPage,
             ],
@@ -31,12 +30,9 @@ class CollectibleResponse implements Responsable
         );
     }
 
-    private function filteredCollectibleList(): Collection
+    private function toResponseModels(): Collection
     {
         return $this->collectibles
-            ->map(
-                fn (Collectible $collectible) => (new CollectibleListResponseModel($collectible))
-                    ->withCart($this->cart)
-            );
+            ->map(fn (Collectible $collectible) => new CollectibleListResponseModel($collectible));
     }
 }

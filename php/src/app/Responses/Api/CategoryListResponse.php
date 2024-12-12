@@ -20,13 +20,13 @@ class CategoryListResponse implements Responsable
     {
         return new JsonResponse(
             data: [
-                'items' => $this->filteredCategoryList(),
+                'items' => $this->toResponseModels(),
             ],
             status: $this->status->value,
         );
     }
 
-    private function filteredCategoryList(): Collection
+    private function toResponseModels(): Collection
     {
         return $this->categories
             ->map(fn (Category $category) => new CategoryListResponseModel($category));

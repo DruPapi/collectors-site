@@ -12,7 +12,7 @@ class CollectibleService
     public function list(Page $page, ?int $categoryId): Collection
     {
         return $this->prepareQuery($categoryId)
-            ->with('itemType')
+            ->with(['itemType', 'cart'])
             ->orderBy('id', 'desc')
             ->limit($page->perPage)
             ->offset($page->offset)
@@ -30,5 +30,12 @@ class CollectibleService
     {
         return Collectible::query()
             ->when($categoryId, fn ($q) => $q->where('category_id', '=', $categoryId));
+    }
+
+    public function getCollectible(int $id)
+    {
+        return Collectible::query()
+            ->with(['itemType', 'cart'])
+            ->findOrFail($id);
     }
 }
