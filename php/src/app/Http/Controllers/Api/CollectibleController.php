@@ -14,6 +14,7 @@ class CollectibleController extends Controller
     public function __construct(
         private readonly Request $request,
         private readonly CollectibleService $collectibleService,
+        private readonly CartService $cartService,
     ) {}
 
     public function index(): CollectibleListResponse
