@@ -2,7 +2,6 @@
 
 namespace App\Responses\Models\Abstracts;
 
-use App\Models\Abstracts\Model;
 use Arr;
 use Illuminate\Contracts\Support\Arrayable;
 
@@ -10,9 +9,7 @@ abstract class ResponseModel implements Arrayable
 {
     protected array $visible = ['*'];
 
-    public function __construct(
-        protected readonly Model $childModel
-    ) {}
+    public function __construct(protected $childModel) {}
 
     public function toArray()
     {
