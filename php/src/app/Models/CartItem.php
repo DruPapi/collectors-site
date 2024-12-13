@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Abstracts\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -24,6 +25,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class CartItem extends Model
 {
     protected $table = 'cart_items';
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('own', function (Builder $q) {
+            $q->where('user_id', '=', auth()->id() ?? 0);
+        });
+    }
 
     public function user(): BelongsTo
     {

@@ -2,17 +2,19 @@
 
 namespace App\Responses\Api;
 
-use App\Models\Category;
-use App\Responses\Models\CategoryListResponse as CategoryListResponseModel;
+use App\Models\Collectible;
+use App\Responses\Models\CollectibleListResponse as CollectibleListResponseModel;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use JustSteveKing\StatusCode\Http;
 
-class CategoryListResponse implements Responsable
+class CollectibleListResponse implements Responsable
 {
     public function __construct(
-        public readonly Collection $categories,
+        public readonly Collection $collectibles,
+        public readonly int $maxPage,
+        public readonly int $currentPage,
         public readonly Http $status = Http::OK,
     ) {}
 
@@ -21,6 +23,8 @@ class CategoryListResponse implements Responsable
         return new JsonResponse(
             data: [
                 'items' => $this->toResponseModels(),
+                'max_page' => $this->maxPage,
+                'current_page' => $this->currentPage,
             ],
             status: $this->status->value,
         );
@@ -28,7 +32,7 @@ class CategoryListResponse implements Responsable
 
     private function toResponseModels(): Collection
     {
-        return $this->categories
-            ->map(fn (Category $category) => new CategoryListResponseModel($category));
+        return $this->collectibles
+            ->map(fn (Collectible $collectible) => new CollectibleListResponseModel($collectible));
     }
 }
