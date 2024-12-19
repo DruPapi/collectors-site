@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\OrderStatus;
 use App\Models\Abstracts\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -26,11 +27,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Order query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Order withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Order withoutTrashed()
+ * @method static \Database\Factories\OrderFactory factory($count = null, $state = [])
  *
  * @mixin \Eloquent
  */
 class Order extends Model
 {
+    use HasFactory;
     use SoftDeletes;
 
     protected $table = 'orders';

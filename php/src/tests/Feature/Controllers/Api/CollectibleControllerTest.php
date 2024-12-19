@@ -2,12 +2,19 @@
 
 namespace Tests\Feature\Controllers\Api;
 
+use App\Models\Category;
+use App\Models\Collectible;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class CollectibleControllerTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_GivenNoFilters_WhenFetched_ThenReturnsTheCorrectObjectStructure(): void
     {
+        Category::factory()->has(Collectible::factory()->count(5))->create();
+
         $response = $this->get('/api/collectibles');
 
         $response->assertStatus(200);
@@ -30,6 +37,7 @@ class CollectibleControllerTest extends TestCase
     {
         $page = 1000;
         $categoryId = -1;
+        Category::factory()->has(Collectible::factory()->count(5))->create();
 
         $response = $this->get('/api/collectibles?category_id=' . $categoryId . '&page=' . $page);
 
@@ -48,7 +56,8 @@ class CollectibleControllerTest extends TestCase
 
     public function test_GivenNoAdditionalData_WhenFetched_ThenReturnsRequiredFields(): void
     {
-        $itemId = 200;
+        Category::factory()->has(Collectible::factory()->count(5))->create();
+        $itemId = Collectible::orderBy('category_id', 'desc')->orderBy('id')->first()->id;
 
         $response = $this->get('/api/collectibles/' . $itemId);
 

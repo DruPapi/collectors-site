@@ -11,6 +11,9 @@ class CollectibleListResponse extends ResponseModel
         'name',
         'file_name',
         'value',
+    ];
+
+    protected array $appends = [
         'in_cart',
     ];
 }

@@ -8,11 +8,11 @@ use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\JsonResponse;
 use JustSteveKing\StatusCode\Http;
 
-class CollectibleItemResponse implements Responsable
+readonly class CollectibleItemResponse implements Responsable
 {
     public function __construct(
-        public readonly Collectible $collectibleItem,
-        public readonly Http $status = Http::OK,
+        public Collectible $collectibleItem,
+        public Http $status = Http::OK,
     ) {}
 
     public function toResponse($request)

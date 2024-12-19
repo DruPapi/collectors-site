@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Abstracts\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -19,11 +20,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OrderItem newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OrderItem newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|OrderItem query()
+ * @method static \Database\Factories\OrderItemFactory factory($count = null, $state = [])
  *
  * @mixin \Eloquent
  */
 class OrderItem extends Model
 {
+    use HasFactory;
+
     protected $table = 'order_items';
 
     public function order(): BelongsTo
