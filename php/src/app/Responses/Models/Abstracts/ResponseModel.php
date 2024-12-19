@@ -2,7 +2,6 @@
 
 namespace App\Responses\Models\Abstracts;
 
-use Arr;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Database\Eloquent\JsonEncodingException;
@@ -13,13 +12,18 @@ abstract class ResponseModel implements Arrayable, Jsonable, JsonSerializable
 {
     protected array $visible = ['*'];
 
+    protected array $appends = [];
+
     public function __construct(protected $childModel) {}
 
     public function toArray()
     {
-        return (count($this->visible) === 1 && Arr::first($this->visible) === '*')
-            ? $this->childModel->toArray()
-            : $this->childModel->only($this->visible);
+        $this->childModel
+            ->setVisible($this->visible)
+            ->makeVisible($this->appends)
+            ->setAppends($this->appends);
+
+        return $this->childModel->toArray();
     }
 
     public function toJson($options = 0)

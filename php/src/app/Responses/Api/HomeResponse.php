@@ -7,13 +7,13 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Carbon;
 use JustSteveKing\StatusCode\Http;
 
-class HomeResponse implements Responsable
+readonly class HomeResponse implements Responsable
 {
     public function __construct(
-        public readonly int $numberOfExchanges,
-        public readonly Carbon $collectorsSiteStartedAt,
-        public readonly string $content,
-        public readonly Http $status = Http::OK,
+        public int $numberOfExchanges,
+        public Carbon $collectorsSiteStartedAt,
+        public string $content,
+        public Http $status = Http::OK,
     ) {}
 
     public function toResponse($request)

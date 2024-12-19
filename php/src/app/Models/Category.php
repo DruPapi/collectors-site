@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Abstracts\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -20,11 +21,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category withoutTrashed()
+ * @method static \Database\Factories\CategoryFactory factory($count = null, $state = [])
  *
  * @mixin \Eloquent
  */
 class Category extends Model
 {
+    use HasFactory;
     use SoftDeletes;
 
     protected $table = 'categories';

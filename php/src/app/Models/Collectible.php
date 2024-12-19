@@ -3,7 +3,10 @@
 namespace App\Models;
 
 use App\Models\Abstracts\Model;
+use App\Services\Drivers\Cart\CartFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -30,18 +33,36 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Collectible withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Collectible withoutTrashed()
  *
+ * @property-read \App\Models\CartItem|null $cart
+ * @property-read mixed $in_cart
+ * @property-read mixed $type
+ *
+ * @method static \Database\Factories\CollectibleFactory factory($count = null, $state = [])
+ *
  * @mixin \Eloquent
  */
 class Collectible extends Model
 {
+    use HasFactory;
     use SoftDeletes;
 
     protected $table = 'collectibles';
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('filterHidden', function (Builder $q) {
+            if (!auth()->user()?->hasAccess('collectibles', 'edit')) {
+                $q->where('is_public', '=', 1);
+            }
+        });
+    }
+
     protected function inCart(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->cart->quantity ?? 0,
+            get: fn () => CartFactory::get()->inCart($this),
         );
     }
 

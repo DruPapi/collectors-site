@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Abstracts\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -20,11 +21,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ItemType query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ItemType withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ItemType withoutTrashed()
+ * @method static \Database\Factories\ItemTypeFactory factory($count = null, $state = [])
  *
  * @mixin \Eloquent
  */
 class ItemType extends Model
 {
+    use HasFactory;
     use SoftDeletes;
 
     protected $table = 'item_types';

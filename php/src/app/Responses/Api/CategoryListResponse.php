@@ -9,11 +9,11 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use JustSteveKing\StatusCode\Http;
 
-class CategoryListResponse implements Responsable
+readonly class CategoryListResponse implements Responsable
 {
     public function __construct(
-        public readonly Collection $categories,
-        public readonly Http $status = Http::OK,
+        public Collection $categories,
+        public Http $status = Http::OK,
     ) {}
 
     public function toResponse($request)
