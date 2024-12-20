@@ -19,6 +19,20 @@ services:
     container_name: collectors-php
     volumes:
       - ./php/src:/var/www
+  site:
+    build:
+      context: site
+      dockerfile: dockerfiles/DevDockerfile
+    command: "npm start"
+    container_name: collectors-site
+    environment:
+      - NODE_ENV=local
+    ports:
+      - "4200:4200"
+    user: "node"
+    volumes:
+      - ./site/src:/home/node/app
+    working_dir: /home/node/app
   server:
     build:
       context: server
