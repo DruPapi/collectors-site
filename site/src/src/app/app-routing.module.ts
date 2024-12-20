@@ -5,6 +5,10 @@ import { CartComponent } from './pages/cart/cart.component';
 
 const routes: Routes = [
   {
+    path:'',
+    component:HomeComponent
+  },
+  {
     path:'home',
     component:HomeComponent
   },
@@ -12,9 +16,6 @@ const routes: Routes = [
     path:'cart',
     component: CartComponent
   },
-  {
-    path:'', redirectTo:'home',pathMatch:'full'
-  }
 ];
 
 @NgModule({
