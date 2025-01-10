@@ -1,68 +1,34 @@
 <mat-drawer-container
-  [autosize]="true"
-  class="min-h-full max-w-7xl mx-auto border-x"
+        [autosize]="true"
+        class="min-h-full max-w-7xl mx-auto border-x"
 >
-  <mat-drawer mode="side" opened class="p-6">
-    <app-filters (showCategory)="onShowCategory($event)"></app-filters>
-  </mat-drawer>
-  <mat-drawer-content class="p-6">
-    <app-products-header
-      (columnsCountChange)="onColumnsCountChange($event)"
-    ></app-products-header>
-    <mat-grid-list 
-    gutterSize="16"
-    [cols]="cols"
-    [rowHeight]="rowHeight"
-    >
-    <mat-grid-tile>
-      <app-product-box
-       class="w-full"
-       [fullWidthMode]="cols === 1"
-      ></app-product-box>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <app-product-box
-       class="w-full"
-       [fullWidthMode]="cols === 1"
-      ></app-product-box>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <app-product-box
-       class="w-full"
-       [fullWidthMode]="cols === 1"
-      ></app-product-box>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <app-product-box
-       class="w-full"
-       [fullWidthMode]="cols === 1"
-      ></app-product-box>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <app-product-box
-       class="w-full"
-       [fullWidthMode]="cols === 1"
-      ></app-product-box>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <app-product-box
-       class="w-full"
-       [fullWidthMode]="cols === 1"
-      ></app-product-box>
-    </mat-grid-tile>
-    </mat-grid-list>
-    <mat-grid-tile>
-      <app-product-box
-       class="w-full"
-       [fullWidthMode]="cols === 1"
-      ></app-product-box>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <app-product-box
-       class="w-full"
-       [fullWidthMode]="cols === 1"
-      ></app-product-box>
-    </mat-grid-tile>
-    
-  </mat-drawer-content>
+    <mat-drawer [mode]="sidenavMode" [opened]="sidenavOpened" class="p-6">
+        <app-categories (showCategory)="onShowCategory($event)"></app-categories>
+    </mat-drawer>
+    <mat-drawer-content class="p-6">
+        <mat-card appearance="outlined">
+            <mat-card appearance="outlined" style="max-width: 230px; float: right" class="">
+                <mat-card-content>
+                    <p>Összesen <span class="font-bold">{{ dataSource?.number_of_exchanges }}</span> csere történt<br>
+                        <span class="font-bold">{{ dataSource?.collectors_site_started_at }}-óta</span></p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card-header>
+                <mat-card-title>Üdvözöllek honlapomon!</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>Regisztráció után nyílnak meg előtted a honlap lehetőségei. A megtetsző szalvétákat kosárba teheted,
+                    amely megőrzi tartalmát kijelentkezés után is. De ennek tartalmát megnézheted, ki is vehetsz belőle.
+                    Miután a 'Megrendelem' gombra kattintasz, megjelenik nálam a lista, amit a szokásos módon
+                    küldök.</p>
+                <p>De először nézd meg a választékot: --> itt <-- vagy baloldalon a Csereszalvéták menüpont alatt.</p>
+                <p>Ha új látogató vagy, regisztrálj, írj egy e-mailt a kubi1965@gmail.com címre, és megbeszéljük a
+                    szalvétacserélés részleteit.</p>
+                <p>&nbsp;</p>
+                <p>Kellemes válogatást!</p>
+                <p>Erzsi</p>
+                <p><img src="/assets/images/sokszalvi.jpg"></p>
+            </mat-card-content>
+        </mat-card>
+    </mat-drawer-content>
 </mat-drawer-container>

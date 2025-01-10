@@ -1,19 +1,38 @@
 import { Component } from "@angular/core";
-const ROWS_HEIGHT: { [id: number]: number } = { 1: 400, 3: 335, 4: 350 };
+import { BaseComponent } from "../base/base.component";
+import { CategoryItem } from "../../models/category.model";
+import { HomeService } from "../../services/home.service";
+import { HomeContent } from "../../models/home-content.model";
+import { ErrorHandlerService } from "../../services/error-handler.service";
+
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
 })
-export class HomeComponent {
-  cols = 3;
-  rowHeight = ROWS_HEIGHT[this.cols];
-  category: string | undefined;
+export class HomeComponent extends BaseComponent {
+  category: CategoryItem | undefined;
+  dataSource: HomeContent | undefined;
 
-  onColumnsCountChange(colsNum: number): void {
-    this.cols = colsNum;
-    console.log(colsNum); //*working out
+  constructor(
+      private homeService: HomeService,
+      private errorHandler: ErrorHandlerService,
+  ) {
+    super();
   }
-  onShowCategory(newCategory: string): void {
+
+  ngOnInit(): void {
+    console.log("HomeComponent");
+    this.homeService.getContents().subscribe({
+      next: (data) => {
+        this.dataSource = data;
+      },
+      error: (error) => {
+        this.errorHandler.handle(error);
+      },
+    });
+  }
+
+  onShowCategory(newCategory: CategoryItem): void {
     this.category = newCategory;
     console.log(newCategory);
   }
