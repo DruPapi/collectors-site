@@ -1,0 +1,31 @@
+<mat-drawer-container
+        [autosize]="true"
+        class="min-h-full max-w-7xl mx-auto border-x"
+>
+    <mat-drawer [mode]="sidenavMode" [opened]="sidenavOpened" class="p-6">
+        <app-categories (showCategory)="onShowCategory($event)"></app-categories>
+    </mat-drawer>
+    <mat-drawer-content class="p-6" *ngIf="dataSource">
+        <app-products-header
+                (columnsCountChange)="onColumnsCountChange($event)"
+        ></app-products-header>
+        <mat-grid-list
+                gutterSize="16"
+                [cols]="cols"
+                rowHeight="5:8"
+        >
+            <ng-container
+                    *ngFor="let collectible of dataSource">
+            <mat-grid-tile>
+                <app-product-box
+                        class="w-full"
+                        [collectible]="collectible"
+                        [categoryId]="categoryId"
+                        [fullWidthMode]="cols === 1"
+                ></app-product-box>
+            </mat-grid-tile>
+            </ng-container>
+        </mat-grid-list>
+
+    </mat-drawer-content>
+</mat-drawer-container>
