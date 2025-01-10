@@ -22,7 +22,8 @@ import { ProductsHeaderComponent } from './components/products-header/products-h
 import { CategoriesComponent } from './components/categories/categories.component';
 import { ProductBoxComponent } from './components/product-box/product-box.component';
 import { CartComponent } from './pages/cart/cart.component';
-import { CollectibleComponent } from './pages/collectible/collectible.component';
+import { CollectibleComponent } from "./pages/collectible/collectible.component";
+import { CollectiblesComponent } from './pages/collectible/collectibles.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { CollectibleComponent } from './pages/collectible/collectible.component'
     CategoriesComponent,
     ProductBoxComponent,
     CollectibleComponent,
+    CollectiblesComponent,
     CartComponent
   ],
   imports: [
