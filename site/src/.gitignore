@@ -1,2 +1,4 @@
 ../node_modules/
 /.angular/cache
+/src/assets/images/P*.JPG
+/src/assets/images/mini/

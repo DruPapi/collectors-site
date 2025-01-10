@@ -5,7 +5,7 @@
             <mat-divider></mat-divider>
             <div class="mat-list-item"
                  *ngFor="let category of dataSource">
-                <a href="category.id">
+                <a href="/szalvetak?category_id={{category.id}}">
                     {{ category.name }}
                     <span class="font-light">({{ category.collectibles_count }})</span>
                 </a>
