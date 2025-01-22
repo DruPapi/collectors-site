@@ -8,22 +8,7 @@ import { Cart, CartItem } from "src/app/models/cart.model";
 })
 export class CartComponent {
   cart: Cart = {
-    items: [
-      {
-        product: "https://via.placeholder.com/150",
-        name: "Snickers",
-        price: 100,
-        quantity: 1,
-        id: 1,
-      },
-      {
-        product: "https://via.placeholder.com/150",
-        name: "Mars",
-        price: 200,
-        quantity: 2,
-        id: 2,
-      },
-    ],
+    items: [],
   };
   dataSource: CartItem[] = [];
   displayedColumns: string[] = [
@@ -38,6 +23,6 @@ export class CartComponent {
     this.dataSource = this.cart.items;
   }
   getTotal(items: CartItem[]): number {
-    return items.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
+    return items.reduce((acc, curr) => acc + curr.collectible.value * curr.quantity, 0);
   }
 }

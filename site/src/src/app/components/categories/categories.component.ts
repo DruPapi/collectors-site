@@ -9,7 +9,7 @@ import { ErrorHandlerService } from "../../services/error-handler.service";
 })
 export class CategoriesComponent {
   @Output() showCategory = new EventEmitter<CategoryItem>();
-  categories:Categories | undefined;
+  categories: Categories | undefined;
   dataSource: Array<CategoryItem> = [];
 
   constructor(
