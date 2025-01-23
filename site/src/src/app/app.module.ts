@@ -24,6 +24,7 @@ import { ProductBoxComponent } from './components/product-box/product-box.compon
 import { CartComponent } from './pages/cart/cart.component';
 import { CollectibleComponent } from "./pages/collectible/collectible.component";
 import { CollectiblesComponent } from './pages/collectible/collectibles.component';
+import { CartMenuComponent } from "./components/cart-menu/cart-menu.component";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { CollectiblesComponent } from './pages/collectible/collectibles.componen
     ProductBoxComponent,
     CollectibleComponent,
     CollectiblesComponent,
-    CartComponent
+    CartComponent,
+    CartMenuComponent
   ],
   imports: [
     BrowserModule,

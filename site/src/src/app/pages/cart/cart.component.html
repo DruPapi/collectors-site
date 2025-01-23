@@ -43,11 +43,11 @@
         {{ item.quantity * item.price | currency }}
       </td>
       <span class="font-bold py-5 block">
-        {{ getTotal(cart.items) | currency }}
+        {{ cart.getAllValue() | currency }}
       </span>
       <td mat-footer-cell *matFooterCellDef>
         <span class="font-bold py-5 block">
-          {{ getTotal(cart.items) | currency }}
+          {{ cart.getAllValue() | currency }}
         </span>
       </td>
     </ng-container>

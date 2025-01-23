@@ -5,6 +5,8 @@ import { CollectibleService } from "../../services/collectible.service";
 import { ErrorHandlerService } from "../../services/error-handler.service";
 import { CategoryItem } from "../../models/category.model";
 import { ActivatedRoute } from "@angular/router";
+import { CartService } from "../../services/cart.service";
+import { CartItem } from "../../models/cart.model";
 
 @Component({
   selector: "app-cart",
@@ -20,6 +22,7 @@ export class CollectibleComponent extends BaseComponent implements OnInit {
 
   constructor(
       private collectibleService: CollectibleService,
+      private cartService: CartService,
       private errorHandler: ErrorHandlerService,
       private activatedRoute: ActivatedRoute,
   ) {
@@ -41,6 +44,30 @@ export class CollectibleComponent extends BaseComponent implements OnInit {
         },
       });
     });
+  }
+
+  addToCart(): void {
+    this.cartService.addToCart(this.collectible).subscribe({
+      next: (cartItem: CartItem) => {
+        // @ts-ignore
+        this.collectible.in_cart = true;
+      },
+      error: (error) => {
+        this.errorHandler.handle(error);
+      },
+    })
+  }
+
+  removeFromCart(): void {
+    this.cartService.removeFromCart(this.collectible).subscribe({
+      next: () => {
+        // @ts-ignore
+        this.collectible.in_cart = false;
+      },
+      error: (error: any) => {
+        this.errorHandler.handle(error);
+      }
+    })
   }
 
   onShowCategory(newCategory: CategoryItem): void {
