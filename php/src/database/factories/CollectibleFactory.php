@@ -28,4 +28,11 @@ class CollectibleFactory extends Factory
             'quantity' => fake()->numberBetween(1, 10),
         ];
     }
+
+    public function withCategory(int $id)
+    {
+        return $this->state(fn (array $attributes) => [
+            'category_id' => $id,
+        ]);
+    }
 }

@@ -26,6 +26,11 @@ class Property extends Model
 
     protected $table = 'properties';
 
+    protected $fillable = [
+        'name',
+        'value',
+    ];
+
     protected static string $cachePrefix = 'properties';
 
     public static function getProperty(string $name): ?self
