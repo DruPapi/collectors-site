@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { CartService } from "../../services/cart.service";
-import { CartItem } from "../../models/cart.model";
+import { CartI, CartItem } from "../../models/cart.model";
 
 @Component({
     selector: "app-cart-menu",
@@ -11,7 +11,11 @@ export class CartMenuComponent {
         private cartService: CartService,
     ) {}
 
+    getCart(): CartI {
+        return this.cartService.cart;
+    }
+
     getCartItems(): Array<CartItem> {
-        return this.cartService.cartItems;
+        return this.getCart().items;
     }
 }

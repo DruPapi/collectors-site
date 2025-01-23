@@ -17,11 +17,23 @@
                         {{ cartItem.collectible.name }}
                     </mat-grid-tile>
                 </ng-container>
+                <ng-container *ngIf="getCartItems().length === 0">
+                    <mat-grid-tile colspan="3">
+                        A kosár üres
+                    </mat-grid-tile>
+                </ng-container>
             </mat-grid-list>
         </div>
-        <div class="flex justify-between py-3 font-light">
-            Total:
-            <span class="font-bold">{{ "450" | currency }}</span>
+        <div>
+            <ng-container *ngIf="getCartItems().length > 0">
+                <mat-grid-list cols="2" rowHeight="20px">
+                    <mat-grid-tile rowspan="2">
+                        Összesen:
+                    </mat-grid-tile>
+                    <mat-grid-tile><span class="font-bold">{{ getCart().getAllQuantity() }} db</span> &nbsp;szalvéta</mat-grid-tile>
+                    <mat-grid-tile><span class="font-bold">{{ getCart().getAllValue() }}</span> &nbsp;értékben</mat-grid-tile>
+                </mat-grid-list>
+            </ng-container>
         </div>
         <div class="pt-3 flex justify-between">
             <button class="bg-rose-600 text-white rounded-full w-9 h-9">

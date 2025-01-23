@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { Cart, CartItem } from "../models/cart.model";
+import { Cart, CartI, CartItem } from "../models/cart.model";
 import { CollectibleItem } from "../models/collectible.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  public cartItems: Array<CartItem> = [];
+  public cart: CartI = new Cart([]);
 
   constructor(private http: HttpClient) {
-    this.http.get<Cart>('/api/cart').subscribe({
+    this.http.get<CartI>('/api/cart').subscribe({
       next: (data: Cart) => {
-        this.cartItems = data.items;
+        this.cart = new Cart(data.items);
       }
     });
   }
@@ -27,7 +27,7 @@ export class CartService {
     let request = this.http.post<CartItem>('/api/cart/add', postData);
     request.subscribe({
       next: (data: CartItem) => {
-        this.cartItems.push(data);
+        this.cart.items.push(data);
       }
     });
 
@@ -46,7 +46,7 @@ export class CartService {
     });
     request.subscribe({
       next: () => {
-        this.cartItems = this.cartItems.filter((cartItem) => item?.id != cartItem.collectible.id);
+        this.cart.items = this.cart.items.filter((cartItem) => item?.id != cartItem.collectible.id);
       }
     })
 
