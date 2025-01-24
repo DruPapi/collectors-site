@@ -7,6 +7,7 @@ import { CategoryItem } from "../../models/category.model";
 import { ActivatedRoute } from "@angular/router";
 import { CartService } from "../../services/cart.service";
 import { CartItem } from "../../models/cart.model";
+import { PathService } from "../../services/path.service";
 
 @Component({
   selector: "app-cart",
@@ -21,6 +22,7 @@ export class CollectibleComponent extends BaseComponent implements OnInit {
   collectible: CollectibleItem | null = null;
 
   constructor(
+      public path: PathService,
       private collectibleService: CollectibleService,
       private cartService: CartService,
       private errorHandler: ErrorHandlerService,
