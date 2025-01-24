@@ -12,23 +12,23 @@
                 cols="1"
                 rowHeight="600"
         >
-            <mat-grid-tile>
+            <mat-grid-tile *ngIf="collectible">
 
                 <div class="card shadow p-3 mb-5 mt-5 rounded mat-int">
                     <img class="card-img-top rounded block"
-                         data-src="/assets/images/{{ collectible?.file_name}}"
-                         alt="{{ collectible?.name }}"
+                         data-src="{{ path.imagePath(collectible) }}"
+                         alt="{{ collectible.name }}"
                          src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22508%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20508%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_17680c0183d%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A25pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_17680c0183d%22%3E%3Crect%20width%3D%22508%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22169.75%22%20y%3D%22123.6%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
                          data-holder-rendered="true">
                     <div class="card-body">
                         <div class="flex justify-between pt-4">
-                            <h3 class="mat-h3 collect-h3 inline-block">{{ collectible?.name }}</h3>
+                            <h3 class="mat-h3 collect-h3 inline-block">{{ collectible.name }}</h3>
                             <mat-icon
-                                    *ngIf="!collectible?.in_cart"
+                                    *ngIf="!collectible.in_cart"
                                     (click)="addToCart()"
                                     class="right-0 cursor-pointer">add_shopping_cart</mat-icon>
                             <mat-icon
-                                    *ngIf="collectible?.in_cart"
+                                    *ngIf="collectible.in_cart"
                                     (click)="removeFromCart()"
                                     matBadgeColor="warn"
                                     matBadge="1"
@@ -36,16 +36,30 @@
 
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group mat-small">
-                                {{collectible?.type}}
-                            </div>
-                            <span class="badge badge-primary mat-small">Csereérték: <span class="font-bold">{{collectible?.value }}</span></span>
+                            <span class="mat-small">
+                                {{ collectible.type }}
+                            </span>
+                            <span class="badge badge-primary mat-small ml-4">Csereérték: <span class="font-bold">{{ collectible.value }}</span></span>
                         </div>
                     </div>
                 </div>
 
             </mat-grid-tile>
         </mat-grid-list>
+        <div class="mt-2">
+            <div class="float-left" *ngIf="dataSource.previous">
+                <a href="{{ path.collectibleViewPath(dataSource.previous, categoryId) }}">
+                    <img data-src="/assets/images/mini/TN_{{ dataSource.previous.file_name }}" />
+                    &lt; Előző
+                </a>
+            </div>
+            <div class="float-right text-right" *ngIf="dataSource.next">
+                <a href="{{ path.collectibleViewPath(dataSource.next, categoryId) }}">
+                    <img data-src="/assets/images/mini/TN_{{ dataSource.next.file_name }}" />
+                    Következő &gt;
+                </a>
+            </div>
+        </div>
 
     </mat-drawer-content>
 </mat-drawer-container>

@@ -5,8 +5,8 @@ export interface Collectibles {
 }
 export interface Collectible {
     item: CollectibleItem;
-    previous: number | null;
-    next: number | null;
+    previous: CollectibleSibling | null;
+    next: CollectibleSibling | null;
 }
 export interface CollectibleItem {
     id: number;
@@ -15,4 +15,9 @@ export interface CollectibleItem {
     value: number;
     in_cart: boolean;
     type: string;
+}
+export interface CollectibleSibling {
+    id: number;
+    name: string;
+    file_name: string;
 }
