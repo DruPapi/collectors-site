@@ -1,0 +1,9 @@
+<div *ngIf="currentPage && maxPage">
+    <ul>
+        <li *ngFor="let page of pages">
+            <a data-href="{{ path.listPagePath(page.pageNumber, categoryId) }}" [ngClass]="{active: page.active}">
+                {{ page.label }}
+            </a>
+        </li>
+    </ul>
+</div>

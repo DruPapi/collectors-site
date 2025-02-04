@@ -3,18 +3,21 @@ import { BaseComponent } from "../base/base.component";
 import { CollectibleItem, Collectibles } from "../../models/collectible.model";
 import { CollectibleService } from "../../services/collectible.service";
 import { ErrorHandlerService } from "../../services/error-handler.service";
-import { CategoryItem } from "../../models/category.model";
+import { Categories, CategoryItem } from "../../models/category.model";
 import { ActivatedRoute } from "@angular/router";
+import { CategoryService } from "../../services/category.service";
+import { PathService } from "../../services/path.service";
 
 @Component({
   selector: "app-cart",
   templateUrl: "collectibles.component.html",
-  styles: [],
+  styleUrls: ["collectibles.component.scss"],
 })
 export class CollectiblesComponent extends BaseComponent {
   categoryId: number | null = null;
   page: number = 1;
   category: CategoryItem | null = null;
+  categoryPath: CategoryItem[] = [];
   collectibles: Collectibles | null = null;
   dataSource: CollectibleItem[] = [];
   cols: number = 4;
@@ -25,7 +28,9 @@ export class CollectiblesComponent extends BaseComponent {
   }
 
   constructor(
+      public path: PathService,
       private collectibleService: CollectibleService,
+      private categoryService: CategoryService,
       private errorHandler: ErrorHandlerService,
       private activatedRoute: ActivatedRoute,
   ) {
@@ -47,11 +52,20 @@ export class CollectiblesComponent extends BaseComponent {
         this.errorHandler.handle(error);
       },
     });
+
+    this.categoryService.getCategories().subscribe({
+      next: (data: Categories): void => {
+        this.categoryPath = [];
+        let found = data.items.find((it: CategoryItem) => it.id == this.categoryId);
+        if (found) {
+          this.categoryPath.push(found);
+        }
+      }
+    });
   }
 
   onColumnsCountChange(colsNum: number): void {
     this.cols = colsNum;
-    console.log(colsNum);
   }
 
   onShowCategory(newCategory: CategoryItem): void {
