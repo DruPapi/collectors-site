@@ -25,6 +25,7 @@ import { CartComponent } from './pages/cart/cart.component';
 import { CollectibleComponent } from "./pages/collectible/collectible.component";
 import { CollectiblesComponent } from './pages/collectible/collectibles.component';
 import { CartMenuComponent } from "./components/cart-menu/cart-menu.component";
+import { PaginationComponent } from "./components/pagination/pagination.component";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { CartMenuComponent } from "./components/cart-menu/cart-menu.component";
     ProductsHeaderComponent,
     CategoriesComponent,
     ProductBoxComponent,
+    PaginationComponent,
     CollectibleComponent,
     CollectiblesComponent,
     CartComponent,

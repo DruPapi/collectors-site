@@ -6,9 +6,15 @@
         <app-categories (showCategory)="onShowCategory($event)"></app-categories>
     </mat-drawer>
     <mat-drawer-content class="p-6" *ngIf="dataSource">
-        <app-products-header
-                (columnsCountChange)="onColumnsCountChange($event)"
-        ></app-products-header>
+        <mat-card class="mb-4">
+            <div class="flex justify-between">
+                <div id="breadcrumbs" class="flex items-center">
+                    <a href="{{ path.listPagePath(1, null) }}">Szalvéták</a>
+                    <a *ngFor="let pathItem of categoryPath"
+                       href="{{ path.listPagePath(1, pathItem.id) }}">{{ pathItem.name }}</a>
+                </div>
+            </div>
+        </mat-card>
         <mat-grid-list
                 gutterSize="16"
                 [cols]="cols"
@@ -26,6 +32,13 @@
             </mat-grid-tile>
             </ng-container>
         </mat-grid-list>
+
+        <app-pagination
+                *ngIf="collectibles"
+                [currentPage]="page"
+                [maxPage]="collectibles.max_page"
+                [categoryId]="categoryId"
+        ></app-pagination>
 
     </mat-drawer-content>
 </mat-drawer-container>

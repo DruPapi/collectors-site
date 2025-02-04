@@ -7,10 +7,17 @@ import { Observable } from "rxjs";
   providedIn: 'root'
 })
 export class CategoryService {
+  private categories: Observable<Categories>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.categories = this.loadCategories();
+  }
 
   getCategories(): Observable<Categories> {
+    return this.categories;
+  }
+
+  private loadCategories(): Observable<Categories> {
     return this.http.get<Categories>('/api/categories');
   }
 }

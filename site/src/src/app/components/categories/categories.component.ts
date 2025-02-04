@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from "@angular/core";
 import { Categories, CategoryItem } from "../../models/category.model";
 import { CategoryService } from "../../services/category.service";
 import { ErrorHandlerService } from "../../services/error-handler.service";
+import { PathService } from "../../services/path.service";
 
 @Component({
   selector: "app-categories",
@@ -13,6 +14,7 @@ export class CategoriesComponent {
   dataSource: Array<CategoryItem> = [];
 
   constructor(
+      public path: PathService,
       private errorHandler: ErrorHandlerService,
       private categoryService: CategoryService,
   ) {}

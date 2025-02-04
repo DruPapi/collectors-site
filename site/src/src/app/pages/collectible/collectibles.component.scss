@@ -1,0 +1,9 @@
+#breadcrumbs {
+  padding: 0.25rem;
+  > * {
+    &:not(:last-child):after {
+      content: " > ";
+      padding-right: 0.25rem;
+    }
+  }
+}

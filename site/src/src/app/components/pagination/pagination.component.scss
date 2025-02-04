@@ -1,0 +1,18 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+ul {
+  text-align: center;
+  li {
+    margin: 0.5rem;
+    border-radius: 0.25rem;
+    border-width: 1px;
+    display: inline-block;
+    a {
+      padding: 0.5rem;
+      display: inline-block;
+      &.active, &:hover {
+        background-color: map.get(mat.$grey-palette, 200);
+      }
+    }
+  }
+}
