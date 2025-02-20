@@ -63,7 +63,15 @@
         ],
         "fix-cs": [
             "./vendor/bin/pint --dirty"
+        ],
+        "fix-cs-all": [
+            "./vendor/bin/pint"
         ]
+    },
+    "scripts-descriptions": {
+        "analyse": "Test Coding Style and run PHPStan",
+        "fix-cs": "Fix Coding Style on modified files",
+        "fix-cs-all": "Fix Coding Style on ALL files"
     },
     "extra": {
         "laravel": {

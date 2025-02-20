@@ -55,7 +55,7 @@ class UsersOld extends BaseImportModel implements OnlyForDataImport
         ];
     }
 
-    protected function password(): Attribute
+    protected function pass(): Attribute
     {
         return Attribute::make(
             get: fn ($value) => Hash::make($value),

@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'md5users',
         ],
     ],
 
@@ -62,6 +62,11 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', App\Models\User::class),
+        ],
+
+        'md5users' => [
+            'driver' => 'md5pass',
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
 
