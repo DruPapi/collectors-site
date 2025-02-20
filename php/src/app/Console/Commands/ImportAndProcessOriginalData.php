@@ -15,6 +15,7 @@ use App\Models\ItemType;
 use App\Models\User;
 use Exception;
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -43,6 +44,8 @@ class ImportAndProcessOriginalData extends Command implements OnlyForDataImport
      */
     public function handle()
     {
+        Model::preventLazyLoading(false);
+
         $dumpFile = $this->getDumpFile();
 
         $this->prepare($dumpFile);
