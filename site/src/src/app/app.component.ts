@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import translationsHU from "../public/i18n/hu.json";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-root',
@@ -10,4 +12,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'collection';
+
+  constructor(private translate: TranslateService) {
+    translate.setTranslation('hu', translationsHU);
+    translate.setDefaultLang('hu');
+  }
 }

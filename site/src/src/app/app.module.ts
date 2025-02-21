@@ -16,6 +16,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatListModule } from "@angular/material/list";
+import { TranslateModule } from '@ngx-translate/core';
 import { HeaderComponent } from "./components/header/header.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { ProductsHeaderComponent } from './components/products-header/products-header.component';
@@ -26,6 +27,8 @@ import { CollectibleComponent } from "./pages/collectible/collectible.component"
 import { CollectiblesComponent } from './pages/collectible/collectibles.component';
 import { CartMenuComponent } from "./components/cart-menu/cart-menu.component";
 import { PaginationComponent } from "./components/pagination/pagination.component";
+import { MatDialogModule } from "@angular/material/dialog";
+import { LoginDialogContent } from "./components/header/login-dialog/login-dialog.component";
 
 @NgModule({
   declarations: [
@@ -39,7 +42,8 @@ import { PaginationComponent } from "./components/pagination/pagination.componen
     CollectibleComponent,
     CollectiblesComponent,
     CartComponent,
-    CartMenuComponent
+    CartMenuComponent,
+    LoginDialogContent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +54,7 @@ import { PaginationComponent } from "./components/pagination/pagination.componen
     MatMenuModule,
     MatButtonModule,
     MatCardModule,
+    MatDialogModule,
     MatIconModule,
     MatExpansionModule,
     MatListModule,
@@ -58,6 +63,9 @@ import { PaginationComponent } from "./components/pagination/pagination.componen
     MatBadgeModule,
     MatSnackBarModule,
     HttpClientModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'hu'
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
