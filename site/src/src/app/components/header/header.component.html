@@ -1,5 +1,13 @@
 <mat-toolbar class="max-w-7x1 mx-auto border-x justify-between">
   <a routerLink="">Erzsi szalvétái</a>
   <app-cart-menu></app-cart-menu>
-  <button mat-button (click)="openDialog()">User</button>
+  <ng-container *ngIf="user.getUser()">
+      <button mat-button [matMenuTriggerFor]="menu" #menuTrigger>{{ user.getUser()?.name }}</button>
+      <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="logout()">{{ 'header.Logout' | translate }}</button>
+      </mat-menu>
+  </ng-container>
+  <ng-container *ngIf="!user.getUser()">
+    <button mat-button (click)="openDialog()">User</button>
+  </ng-container>
 </mat-toolbar>

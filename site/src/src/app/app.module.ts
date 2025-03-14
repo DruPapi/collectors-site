@@ -28,7 +28,11 @@ import { CollectiblesComponent } from './pages/collectible/collectibles.componen
 import { CartMenuComponent } from "./components/cart-menu/cart-menu.component";
 import { PaginationComponent } from "./components/pagination/pagination.component";
 import { MatDialogModule } from "@angular/material/dialog";
-import { LoginDialogContent } from "./components/header/login-dialog/login-dialog.component";
+import { LoginDialogComponent } from "./components/header/login-dialog/login-dialog.component";
+import { ReactiveFormsModule } from "@angular/forms";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { CartService } from "./services/cart.service";
 
 @NgModule({
   declarations: [
@@ -43,31 +47,34 @@ import { LoginDialogContent } from "./components/header/login-dialog/login-dialo
     CollectiblesComponent,
     CartComponent,
     CartMenuComponent,
-    LoginDialogContent,
+    LoginDialogComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatSidenavModule,
-    MatGridListModule,
-    MatMenuModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDialogModule,
-    MatIconModule,
-    MatExpansionModule,
-    MatListModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatBadgeModule,
-    MatSnackBarModule,
-    HttpClientModule,
-    TranslateModule.forRoot({
-      defaultLanguage: 'hu'
-    }),
-  ],
-  providers: [],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatSidenavModule,
+        MatGridListModule,
+        MatMenuModule,
+        MatButtonModule,
+        MatCardModule,
+        MatDialogModule,
+        MatIconModule,
+        MatExpansionModule,
+        MatListModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatBadgeModule,
+        MatSnackBarModule,
+        HttpClientModule,
+        TranslateModule.forRoot({
+            defaultLanguage: 'hu'
+        }),
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+    ],
+  providers: [CartService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
