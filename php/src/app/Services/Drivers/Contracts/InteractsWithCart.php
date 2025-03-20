@@ -4,7 +4,7 @@ namespace App\Services\Drivers\Contracts;
 
 use App\Models\CartItem;
 use App\Models\Collectible;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection;
 
 interface InteractsWithCart
 {

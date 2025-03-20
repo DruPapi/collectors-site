@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\UserLogggedIn;
 use App\Http\Controllers\Controller;
 use App\Requests\LoginRequest;
 use App\Responses\Api\UserLoginResponse;
@@ -17,6 +18,8 @@ class AuthController extends Controller
         if (!Auth::attempt($credentials)) {
             throw ValidationException::withMessages(['email' => __('auth.failed')]);
         }
+
+        UserLogggedIn::dispatch();
 
         $request->session()->regenerate();
 

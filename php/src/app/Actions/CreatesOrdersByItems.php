@@ -20,14 +20,14 @@ class CreatesOrdersByItems implements OnlyForDataImport
                 return;
             }
 
-            $order = (new Order)->forceFill($oldItems->first()->toMappedRow());
+            $order = (new Order())->forceFill($oldItems->first()->toMappedRow());
             $order->save();
 
             $totalValue = 0;
             $totalQuantity = 0;
 
             $oldItems->each(function (Rendeles $oldItem) use ($order, &$totalValue, &$totalQuantity) {
-                $orderItem = (new OrderItem)
+                $orderItem = (new OrderItem())
                     ->forceFill($oldItem->toMappedOrderItem());
                 $orderItem->order_id = $order->id;
                 $orderItem->created_at = new Carbon($oldItem->datum);

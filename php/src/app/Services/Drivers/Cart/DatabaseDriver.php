@@ -6,7 +6,7 @@ use App\Models\CartItem;
 use App\Models\Collectible;
 use App\Services\Drivers\Contracts\InteractsWithCart;
 use DB;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection;
 
 class DatabaseDriver implements InteractsWithCart
 {
