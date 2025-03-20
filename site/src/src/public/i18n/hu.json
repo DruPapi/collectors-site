@@ -1,0 +1,13 @@
+{
+  "header": {
+    "Logout": "Kijelentkezés"
+  },
+  "login-dialog": {
+    "Cancel": "Mégse",
+    "Login": "Bejelentkezés",
+    "Password": "Jelszó",
+    "Required": "Kötelező",
+    "UsernameOrEMail": "Felhasználónév vagy e-mail cím"
+  },
+  "serviettes": "szalvetak"
+}

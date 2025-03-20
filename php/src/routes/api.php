@@ -18,6 +18,7 @@ Route::delete('cart/remove', [CartController::class, 'remove']);
 Route::prefix('auth')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::middleware('auth')->group(function () {
+        Route::get('me', [AuthController::class, 'me']);
         Route::post('logout', [AuthController::class, 'logout']);
     });
 });

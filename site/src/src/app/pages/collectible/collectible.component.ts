@@ -54,7 +54,7 @@ export class CollectibleComponent extends BaseComponent implements OnInit {
         // @ts-ignore
         this.collectible.in_cart = true;
       },
-      error: (error) => {
+      error: (error: any) => {
         this.errorHandler.handle(error);
       },
     })

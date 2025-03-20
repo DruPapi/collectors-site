@@ -84,8 +84,9 @@ class AuthControllerTest extends TestCase
         $user = User::factory()->password($password)->create();
         Auth::login($user);
 
-        $this->post('/api/auth/logout');
+        $response = $this->post('/api/auth/logout');
 
+        $response->assertOk();
         $this->assertFalse(Auth::check());
     }
 }

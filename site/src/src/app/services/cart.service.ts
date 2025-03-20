@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, tap } from "rxjs";
 import { Cart, CartI, CartItem } from "../models/cart.model";
 import { CollectibleItem } from "../models/collectible.model";
 
@@ -11,6 +11,10 @@ export class CartService {
   public cart: CartI = new Cart([]);
 
   constructor(private http: HttpClient) {
+    this.load();
+  }
+
+  load(): void {
     this.http.get<CartI>('/api/cart').subscribe({
       next: (data: Cart) => {
         this.cart = new Cart(data.items);
@@ -24,14 +28,11 @@ export class CartService {
       quantity: 1,
     };
 
-    let request = this.http.post<CartItem>('/api/cart/add', postData);
-    request.subscribe({
-      next: (data: CartItem) => {
-        this.cart.items.push(data);
-      }
-    });
-
-    return request;
+    return this.http.post<CartItem>('/api/cart/add', postData).pipe(
+        tap(cartItem => {
+            this.cart.items.push(cartItem);
+        })
+    );
   }
 
   removeFromCart(item: CollectibleItem | null): any {
@@ -41,15 +42,12 @@ export class CartService {
       params = params.set("collectible_id", item?.id);
     }
 
-    let request = this.http.delete(`/api/cart/remove`, {
+    return this.http.delete(`/api/cart/remove`, {
       params: params
-    });
-    request.subscribe({
-      next: () => {
-        this.cart.items = this.cart.items.filter((cartItem) => item?.id != cartItem.collectible.id);
-      }
-    })
-
-    return request;
+    }).pipe(
+        tap(_ => {
+            this.cart.items = this.cart.items.filter((cartItem) => item?.id != cartItem.collectible.id);
+        })
+    );
   }
 }

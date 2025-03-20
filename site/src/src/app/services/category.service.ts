@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Categories } from "../models/category.model";
-import { Observable } from "rxjs";
+import { Observable, shareReplay } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
-  private categories: Observable<Categories>;
+  private request$!: Observable<any>;
 
-  constructor(private http: HttpClient) {
-    this.categories = this.loadCategories();
-  }
+  constructor(private http: HttpClient) {}
 
   getCategories(): Observable<Categories> {
-    return this.categories;
-  }
+    if (!this.request$) {
+      this.request$ = this.http.get<Categories>('/api/categories').pipe(
+          shareReplay(1)
+      );
+    }
 
-  private loadCategories(): Observable<Categories> {
-    return this.http.get<Categories>('/api/categories');
+    return this.request$;
   }
 }
