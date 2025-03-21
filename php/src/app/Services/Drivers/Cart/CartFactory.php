@@ -9,7 +9,17 @@ class CartFactory
     public static function get(): InteractsWithCart
     {
         return auth()->id()
-            ? app()->make(DatabaseDriver::class)
-            : app()->make(SessionDriver::class);
+            ? self::getDriverForAuthenticated()
+            : self::getDriverForUnauthenticated();
+    }
+
+    public static function getDriverForAuthenticated(): InteractsWithCart
+    {
+        return app()->make(DatabaseDriver::class);
+    }
+
+    public static function getDriverForUnauthenticated(): InteractsWithCart
+    {
+        return app()->make(SessionDriver::class);
     }
 }

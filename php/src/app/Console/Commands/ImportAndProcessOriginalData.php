@@ -70,7 +70,7 @@ class ImportAndProcessOriginalData extends Command implements OnlyForDataImport
 
     private function prepare($file): void
     {
-        if (Schema::hasTable((new UsersOld)->getTable())) {
+        if (Schema::hasTable((new UsersOld())->getTable())) {
             throw new Exception('Looks like the import has already been completed!');
         }
 
@@ -119,7 +119,7 @@ class ImportAndProcessOriginalData extends Command implements OnlyForDataImport
                 );
         }
 
-        (new CreatesOrdersByItems)->execute();
+        (new CreatesOrdersByItems())->execute();
     }
 
     private function fillPreviouslyHardcodedData(): void
@@ -141,7 +141,7 @@ class ImportAndProcessOriginalData extends Command implements OnlyForDataImport
         ];
 
         foreach ($types as $id => $name) {
-            (new ItemType)->forceFill([
+            (new ItemType())->forceFill([
                 'id' => $id,
                 'name' => $name,
             ])->save();

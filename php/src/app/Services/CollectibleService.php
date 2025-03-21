@@ -58,7 +58,7 @@ class CollectibleService
 
     public function setOrderBy(string $order): void
     {
-        if (!Schema::hasColumn((new Collectible)->getTable(), $order)) {
+        if (!Schema::hasColumn((new Collectible())->getTable(), $order)) {
             throw new FieldNotExistsException('Field "' . $order . '" not exists');
         }
 

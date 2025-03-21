@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\CartItem;
 use App\Services\Drivers\Cart\CartFactory;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection;
 
 class CartService
 {
@@ -24,5 +24,41 @@ class CartService
     {
         return CartFactory::get()
             ->remove($collectibleId);
+    }
+
+    public function mergeCarts(Collection $source, Collection $target): void
+    {
+        if ($target->isEmpty()) {
+            $this->addAllFromSession($source);
+
+            return;
+        }
+
+        $this->mergeSessionIntoDB($target, $source);
+    }
+
+    private function addAllFromSession(Collection $itemsAddedInCurrentSession): void
+    {
+        $driver = CartFactory::getDriverForAuthenticated();
+        $itemsAddedInCurrentSession->each(function ($item) use ($driver) {
+            /** @var CartItem $item */
+            $driver->add($item->collectible_id, $item->quantity);
+        });
+    }
+
+    private function mergeSessionIntoDB(Collection $target, Collection $source): void
+    {
+        $driver = CartFactory::getDriverForAuthenticated();
+        $source->each(function ($item, $key) use ($target, $driver) {
+            /** @var CartItem $item */
+            if ($existingItem = $target->get($key)) {
+                /** @var CartItem $existingItem */
+                $existingItem->quantity = $item->quantity;
+                $existingItem->save();
+
+                return;
+            }
+            $driver->add($item->collectible_id, $item->quantity);
+        });
     }
 }

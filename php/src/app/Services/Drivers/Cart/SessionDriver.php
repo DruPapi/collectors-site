@@ -12,7 +12,7 @@ class SessionDriver implements InteractsWithCart
 {
     public function list(): Collection
     {
-        $items = new Collection;
+        $items = new Collection();
         foreach ($this->getCartItemsArray() as $item) {
             $items->push($item);
         }
